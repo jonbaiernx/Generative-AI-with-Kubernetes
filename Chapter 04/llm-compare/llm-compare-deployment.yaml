@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: llm-compare-deployment
+ labels:
+   app: llm-compare
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: llm-compare
+ template:
+   metadata:
+     labels:
+       app: llm-compare
+   spec:
+     containers:
+     - name: llm-compare
+       image: llm-compare:latest
+       imagePullPolicy: IfNotPresent
+       ports:
+       - containerPort: 7800

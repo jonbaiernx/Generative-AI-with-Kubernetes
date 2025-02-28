@@ -1,0 +1,6 @@
+torch
+gradio
+llama-cpp-python==0.2.56
+langchain
+huggingface_hub[cli]
+hf_transfer

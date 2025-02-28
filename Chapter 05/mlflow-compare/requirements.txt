@@ -1,0 +1,8 @@
+torch
+transformers
+mlflow
+pandas
+torchvision
+tiktoken
+huggingface_hub[cli]
+hf_transfer

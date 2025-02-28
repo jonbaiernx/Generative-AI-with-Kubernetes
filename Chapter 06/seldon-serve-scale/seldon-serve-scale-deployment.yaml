@@ -1,0 +1,36 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: sd-model-scale-depl
+spec:
+  protocol: v2
+  name: seldon-model-scale
+  predictors:
+  - componentSpecs:
+    - hpaSpec:
+        maxReplicas: 3
+        metrics:
+        - resource:
+            name: cpu
+            targetAverageUtilization: 75
+          type: Resource
+        minReplicas: 1
+      spec:
+        containers:
+        - image: seldonio/mlserver:1.3.5-huggingface
+          imagePullPolicy: IfNotPresent
+          name: lamini-flan-t5
+          resources:
+            requests:
+              cpu: '0.5'
+        terminationGracePeriodSeconds: 1
+    graph:
+      name: lamini-flan-t5
+      implementation: HUGGINGFACE_SERVER
+      modelUri: s3://mlflow/      # <-- add path from details page here and delete this comment
+      parameters:
+      - name: task
+        type: STRING
+        value: text-generation
+      envSecretRefName: seldon-init-container-secret
+    name: scale-example

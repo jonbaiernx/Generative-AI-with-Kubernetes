@@ -1,0 +1,19 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: sd-model-depl
+spec:
+  protocol: v2
+  name: seldon-model
+  predictors:
+  - graph:
+      name: lamini-flan-t5
+      implementation: HUGGINGFACE_SERVER
+      modelUri: s3://mlflow/      # <-- add path from details page here and delete this comment
+      parameters:
+      - name: task
+        type: STRING
+        value: text-generation
+      envSecretRefName: seldon-init-container-secret
+    name: model-example
+    replicas: 1

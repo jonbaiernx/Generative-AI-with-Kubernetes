@@ -1,0 +1,5 @@
+torch
+gradio
+llama-cpp-python
+huggingface_hub[cli]
+hf_transfer

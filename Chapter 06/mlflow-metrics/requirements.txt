@@ -1,0 +1,10 @@
+torch
+transformers==4.37.1
+mlflow
+pandas
+torchvision
+evaluate
+textstat
+tiktoken
+huggingface_hub[cli]
+hf_transfer

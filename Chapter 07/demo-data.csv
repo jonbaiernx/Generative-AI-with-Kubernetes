@@ -1,0 +1,40 @@
+﻿department,years_experience,education,job_title,salary,bonus_target
+A Division,7,College A,AI/ML Scientist,45000,4500
+B Division,15,College A,AI/ML Scientist,120000,12000
+C Division,9,College A,AI/ML Scientist,200000,20000
+Central IT,5,College A,DevOps Engineer,175000,17500
+A Division,5,College A,DevOps Engineer,135000,13500
+B Division,15,College A,Engineer Manager,205300,30795
+B Division,14,College A,DevOps Engineer,184700,18470
+A Division,9,College A,Data Scientist,157000,15700
+B Division,13,College A,Data Scientist,380000,38000
+Central IT,15,College A,Engineer Manager,177000,26550
+B Division,7,College A,Project Manager,38400,3840
+A Division,7,College A,Project Manager,22300,2230
+C Division,7,College A,Project Manager,75000,7500
+C Division,7,College A,Business Analyst,98000,9800
+A Division,5,College A,Business Analyst,150000,15000
+A Division,8,College A,Business Analyst,100000,20000
+C Division,0,College A,Business Analyst,55000,None
+B Division,1,College A,Business Analyst,9272,None
+Central IT,1,College B,Network Engineer,70000,None
+Central IT,9,College A,Network Engineer,60000,6000
+Central IT,9,College A,Network Engineer,18000,1800
+Central IT,7,College A,Network Engineer,135000,13500
+Product x,16,College A,Director Software Engineering,160000,32000
+C Division,2,College A,Data Analyst,72000,72000
+C Division,2,College A,Data Analyst,72000,72000
+C Division,0,College A,Data Analyst,85000,None
+B Division,7,College B,,8000,8000
+B Division,0,College A,Data Analyst,10000,None
+C Division,0,College A,,55000,0
+B Division,1,College A,,9272,0
+Central IT,1,College A,Network Eng,70000,None
+Central IT,9,College A,,60000,None
+Central IT,9,College A,Network Engineer,18000,None
+Central IT,7,College A,Network Eng,135000,13500
+Product x,16,College A,Director Software Engineering,160000
+C Division,2,College A,Data Analyst,72000,7200
+C Division,0,College A,,85000,!
+B Division,7,College B,,8000,800
+B Division,0,College B,,10000,!

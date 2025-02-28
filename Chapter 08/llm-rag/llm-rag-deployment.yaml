@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: llm-rag-deployment
+ labels:
+   app: llm-rag
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: llm-rag
+ template:
+   metadata:
+     labels:
+       app: llm-rag
+   spec:
+     containers:
+     - name: llm-rag
+       image: llm-rag:latest
+       imagePullPolicy: IfNotPresent
+       ports:
+       - containerPort: 7801
+       env:
+       - name: CHROMA_TOKEN
+         valueFrom:
+          secretKeyRef:
+            name: chromadb-auth
+            key: token

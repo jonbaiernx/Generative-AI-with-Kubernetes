@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vdb-svc
+spec:
+  selector:
+    app: vdb-demo
+  ports:
+    - name: http
+      protocol: TCP
+      port: 7800
+      targetPort: 7800

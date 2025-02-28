@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: lamini-chat
+ labels:
+   app: lmchat
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: lmchat
+ template:
+   metadata:
+     labels:
+       app: lmchat
+   spec:
+     containers:
+     - name: lmchat
+       image: lm-flant5-chat:latest
+       imagePullPolicy: IfNotPresent
+       env:
+        # Define the environment variable for model server host
+        - name: MODEL_SERVER_HOST
+          value: "sd-model-depl-model-example"
+        # Define the environment variable for model server port
+        - name: MODEL_SERVER_PORT
+          value: "8000"
+        # Define the environment variable for the served model's name
+        - name: MODEL_SERVER_NAME
+          value: "lamini-flan-t5"

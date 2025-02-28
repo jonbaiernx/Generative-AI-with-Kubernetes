@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: openjourneygradio
+ labels:
+   app: ojgradio
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: ojgradio
+ template:
+   metadata:
+     labels:
+       app: ojgradio
+   spec:
+     containers:
+     - name: ojgradio
+       image: gradio-open-journey-gpu:latest
+       imagePullPolicy: IfNotPresent
+       ports:
+       - containerPort: 7800

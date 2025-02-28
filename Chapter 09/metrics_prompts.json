@@ -1,0 +1,14 @@
+{
+    "prompt": [
+        "Hello there AI friend",
+        "Can you help me find a good resturant?",
+        "Write a catchy ad for a new smartphone",
+        "Explain the laws of thermodynamics to a 5th grader"        
+    ],
+    "response": [
+        "Hi, how are you today?",
+        "No way, ya Jerk",
+        "Why don't you write at it",
+        ""
+    ]
+}

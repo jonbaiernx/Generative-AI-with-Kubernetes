@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: vdb-demo
+ labels:
+   app: vdb-demo
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: vdb-demo
+ template:
+   metadata:
+     labels:
+       app: vdb-demo
+   spec:
+     containers:
+     - name: vdb-cnt
+       image: vdb-demo:latest
+       imagePullPolicy: IfNotPresent
+       ports:
+       - containerPort: 7800
+       env:
+       - name: CHROMA_TOKEN
+         valueFrom:
+          secretKeyRef:
+            name: chromadb-auth
+            key: token

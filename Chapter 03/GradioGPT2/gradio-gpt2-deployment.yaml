@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: gradiogpt2chat
+ labels:
+   app: ggpt2chat
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: ggpt2chat
+ template:
+   metadata:
+     labels:
+       app: ggpt2chat
+   spec:
+     containers:
+     - name: ggpt2chat
+       image: ggpt2chat:latest
+       imagePullPolicy: IfNotPresent
+       ports:
+       - containerPort: 7800

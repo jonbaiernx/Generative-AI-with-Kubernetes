@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gpt2-runs
+spec:
+  template:
+    spec:
+      containers:
+      - name: gpt2-runs
+        image: gpt2-runs:latest
+        imagePullPolicy: IfNotPresent
+        command: ["python3",  "gpt2-runs.py"]
+        env:
+        # Define the environment variable for MLFlow Tracking Server IP or Serivce Name
+        - name: MLFLOW_SERVER_IP
+          valueFrom:
+            configMapKeyRef:
+              name: mlflow-config
+              # MLFlow Tracking Server IP or Service Name
+              key: mlflow-server.ip
+        # Define the environment variable for MLFlow Tracking Server Port
+        - name: MLFLOW_SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mlflow-config
+              # MLFlow Tracking Server Port
+              key: mlflow-server.port
+      restartPolicy: Never
+  backoffLimit: 4

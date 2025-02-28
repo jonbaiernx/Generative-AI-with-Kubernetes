@@ -1,0 +1,3 @@
+gradio
+chromadb
+pysqlite3-binary

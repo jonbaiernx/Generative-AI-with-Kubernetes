@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: hello-scaling
+spec:
+  selector:
+    matchLabels:
+      app: hello-scaling
+  template:
+    metadata:
+      labels:
+        app: hello-scaling
+    spec:
+      # Spread across hosts
+      topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: "kubernetes.io/hostname"
+            whenUnsatisfiable: ScheduleAnyway
+            labelSelector:
+              matchLabels:
+                app: hello-scaling
+      containers:
+        - name: hello-geni
+          image: jonbaier/genai-for-k8s  
+          ports: 
+          - name: http   
+            containerPort: 80  
+          resources:    
+            limits:    
+              cpu: 500m   
+            requests:  
+              cpu: 200m
+      terminationGracePeriodSeconds: 1

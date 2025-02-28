@@ -1,0 +1,44 @@
+#Creating new minikube cluster
+minikube start --cpus 4 --memory no-limit -p mlflow
+minikube profile mlflow
+minikube status
+
+
+
+#MLFlow install
+helm install my-mlflow oci://registry-1.docker.io/bitnamicharts/mlflow --set tracking.auth.enabled=false,tracking.service.type=ClusterIP,tracking.service.ports.http=5000,tracking.extraEnvVars[0].name=MLFLOW_HTTP_REQUEST_TIMEOUT --set-string tracking.extraEnvVars[0].value="600"
+
+#Config map for mlflow tracking
+kubectl create configmap mlflow-config --from-literal=mlflow-server.ip=my-mlflow-tracking.default.svc.cluster.local --from-literal=mlflow-server.port=5000
+
+#Port forwarding
+kubectl port-forward --namespace default --address 0.0.0.0 svc/my-mlflow-tracking 5000:5000 &
+
+#Image Build
+minikube image build . -t model-metrics-runs
+
+#Create model metrics comparison run
+kubectl create -f model-metrics-jobs.yaml
+
+#Watch for job to finish
+kubectl wait --for=condition=complete job/model-metrics-runs
+
+#Create MinIO user and give it permission to the 'local' bucket
+kubectl exec -it my-mlflow-minio-xxxxxxxxxx-xxxxx -- sh -c "mc admin user add local sdepuser <REPLACE WITH A STRONG SECRET KEY>"
+kubectl exec -it my-mlflow-minio-xxxxxxxxxx-xxxxx -- sh -c "mc admin policy attach local readwrite --user=sdepuser"
+
+#List Seldon Deployments
+kubectl get sdep
+kubectl get seldondeployment
+
+minikube addons enable metrics-server
+minikube addons list
+
+#port forwarding for Seldon Deployment
+kubectl port-forward --namespace default --address 0.0.0.0 svc/sd-model-depl-default 8000:8000 &
+
+#List Horizontal Pod Autoscalers
+kubectl get HPAs
+
+#List Namespaces
+kubectl get ns

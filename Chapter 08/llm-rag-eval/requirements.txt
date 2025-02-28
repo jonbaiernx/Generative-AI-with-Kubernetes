@@ -1,0 +1,11 @@
+torch 
+gradio 
+huggingface_hub[cli] 
+hf_transfer 
+chromadb 
+pysqlite3-binary 
+llama-index 
+llama-index-llms-huggingface 
+llama-index-embeddings-huggingface 
+llama-index-llms-llama-cpp 
+llama-index-vector-stores-chroma

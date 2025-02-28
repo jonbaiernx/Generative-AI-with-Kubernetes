@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: streamlitgpt2chat
+ labels:
+   app: slgpt2chat
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: slgpt2chat
+ template:
+   metadata:
+     labels:
+       app: slgpt2chat
+   spec:
+     containers:
+     - name: slgpt2chat
+       image: gpt2streamlit:latest
+       imagePullPolicy: IfNotPresent
+       ports:
+         - containerPort: 8501
+       livenessProbe:
+         httpGet:
+           path: /_stcore/health
+           port: 8501
+           scheme: HTTP
+         timeoutSeconds: 1
+       readinessProbe:
+         httpGet:
+           path: /_stcore/health
+           port: 8501
+           scheme: HTTP
+         timeoutSeconds: 1
+       resources:
+         limits:
+           cpu: 1
+           memory: 2Gi
+         requests:
+           cpu: 100m
+           memory: 745Mi

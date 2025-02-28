@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-scaling-load
+  labels:
+    app: hello-scaling-load
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-scaling-load
+  template:
+    metadata:
+      name: hello-scaling-load
+      labels:
+        app: hello-scaling-load
+    spec:
+      containers:
+      - name: hello-scaling-load
+        image: busybox
+        command:
+        - /bin/sh
+        - -c
+        - "while true; do wget -q -O- http://hello-scaling-svc; done"
